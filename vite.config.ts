@@ -8,8 +8,8 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   nitro: {
-    preset: "vercel",
-    // Only override output directories on Vercel so `npm run preview` still works locally.
+    preset: process.env.VERCEL ? "vercel" : (process.env.NITRO_PRESET ?? "node"),
+    // Only override output directories on Vercel so local builds work correctly.
     ...(process.env.VERCEL ? {
       output: {
         dir: ".vercel/output",
